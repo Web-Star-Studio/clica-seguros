@@ -5,7 +5,6 @@ import { NossoCompromissoSection } from '@/components/sections/nosso-compromisso
 import { ParaTodosOsCarrosSection } from '@/components/sections/para-todos-os-carros-section'
 import { SocialProofSection } from '@/components/sections/social-proof-section'
 import { CtaSection } from '@/components/sections/cta-section'
-import { Footer } from '@/components/footer'
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
       <ParaTodosOsCarrosSection />
       <SocialProofSection />
       <CtaSection />
-      <Footer />
     </main>
   )
 }

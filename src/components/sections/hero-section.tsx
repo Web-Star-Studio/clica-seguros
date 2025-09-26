@@ -68,6 +68,7 @@ export function HeroSection() {
   const { scrollY } = useScroll()
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150])
   const [isHovered, setIsHovered] = useState(false)
+  const quiverOnUrl = process.env.NEXT_PUBLIC_QUIVER_ON_URL ?? process.env.QUIVER_ON_URL ?? '/simulacao'
 
   return (
     <section className="relative min-h-[100vh] overflow-hidden">
@@ -156,16 +157,19 @@ export function HeroSection() {
                 className="group relative overflow-hidden"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
+                asChild
               >
-                <span className="relative z-10 flex items-center font-semibold">
-                  Fazer cotação grátis 
-                  <motion.span
-                    animate={{ x: isHovered ? 5 : 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </motion.span>
-                </span>
+                <a href={quiverOnUrl}>
+                  <span className="relative z-10 flex items-center font-semibold">
+                    Fazer cotação grátis 
+                    <motion.span
+                      animate={{ x: isHovered ? 5 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </motion.span>
+                  </span>
+                </a>
               </Button>
             </motion.div>
 
@@ -231,7 +235,7 @@ export function HeroSection() {
               floatIntensity={20}
             >
               <motion.div 
-                className="cursor-pointer bg-[#000762] rounded-2xl bg-neutral-charcoal p-6 text-white shadow-2xl transition-all hover:scale-105"
+                className="cursor-pointer rounded-2xl bg-neutral-charcoal p-6 text-white shadow-2xl transition-all hover:scale-105"
                 whileHover={{ rotate: 2 }}
               >
                 <div className="flex items-center gap-3 ">

@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { Header } from '@/components/header'
+import { Footer } from '@/components/footer'
 import { QueryProvider } from '@/lib/providers/query-provider'
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
@@ -40,13 +41,15 @@ export default function RootLayout({
 }) {
   const pathname = usePathname()
   const shouldShowHeader = !pathname.startsWith('/dashboard') && !pathname.startsWith('/admin')
+  const shouldShowFooter = shouldShowHeader
 
   return (
     <html lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}>
-      <body>
+      <body suppressHydrationWarning={true}>
         <QueryProvider>
           {shouldShowHeader && <Header />}
           {children}
+          {shouldShowFooter && <Footer />}
         </QueryProvider>
       </body>
     </html>

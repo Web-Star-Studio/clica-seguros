@@ -13,7 +13,8 @@ import {
   Calendar,
   User,
   CreditCard,
-  Zap
+  Zap,
+  ArrowRight
 } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 import { Badge } from '../ui/badge'
@@ -92,7 +93,7 @@ function PhoneMockup({ step, isActive }: { step: typeof steps[0], isActive: bool
           
           {/* App header */}
           <div className="bg-primary p-4 rounded-md">
-            <h4 className="text-center text-lg font-bold text-neutral-charcoal text-white">Clica Seguros</h4>
+            <h4 className="text-center text-lg font-bold text-white">Clica Seguros</h4>
           </div>
           
           {/* Progress bar */}
@@ -342,24 +343,8 @@ export function SinistroSemEstresseSection() {
   
   const backgroundY = useTransform(scrollYProgress, [0, 1], [-50, 50])
   const [activeStep, setActiveStep] = useState(0)
-  const [isSimulating, setIsSimulating] = useState(false)
   
-  // Auto-advance steps when simulating
-  useEffect(() => {
-    if (!isSimulating) return
-    
-    const interval = setInterval(() => {
-      setActiveStep((prev) => {
-        if (prev >= steps.length - 1) {
-          setIsSimulating(false)
-          return prev
-        }
-        return prev + 1
-      })
-    }, 3000)
-    
-    return () => clearInterval(interval)
-  }, [isSimulating, activeStep])
+  const quiverOnUrl = process.env.NEXT_PUBLIC_QUIVER_ON_URL ?? process.env.QUIVER_ON_URL ?? '/simulacao'
   
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-gradient-to-b from-white to-neutral-light-gray/30 py-32">
@@ -462,10 +447,9 @@ export function SinistroSemEstresseSection() {
             <PhoneMockup step={steps[activeStep]} isActive={true} />
           </div>
           
-          {/* Steps and controls */}
           <div className="flex flex-col justify-center space-y-8">
             {/* Live price calculator */}
-            {isSimulating && activeStep === 1 && (
+            {activeStep === 1 && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -528,7 +512,7 @@ export function SinistroSemEstresseSection() {
                         >
                           <Clock className="h-4 w-4 text-primary" />
                           <span className="text-sm font-semibold text-primary">
-                            {isSimulating ? 'Processando...' : 'Clique para ver'}
+                            {activeStep === index ? 'Etapa atual' : 'Clique para ver'}
                           </span>
                         </motion.div>
                       )}
@@ -555,32 +539,15 @@ export function SinistroSemEstresseSection() {
               transition={{ delay: 0.5 }}
             >
               <Button 
+                asChild
                 size="lg" 
                 className="group w-full bg-neutral-charcoal hover:bg-neutral-dark-gray"
-                onClick={() => {
-                  setIsSimulating(true)
-                  setActiveStep(0)
-                }}
-                disabled={isSimulating}
               >
-                {isSimulating ? (
-                  <>
-                    <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Simulando...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="mr-2 h-4 w-4" />
-                    Começar simulação ao vivo
-                    <motion.span
-                      className="ml-2"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      →
-                    </motion.span>
-                  </>
-                )}
+                <a href={quiverOnUrl}>
+                  <span className="flex items-center justify-center gap-2 text-white">
+                    Simular agora
+                  </span>
+                </a>
               </Button>
             </motion.div>
           </div>

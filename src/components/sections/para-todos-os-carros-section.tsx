@@ -6,6 +6,8 @@ import { ArrowRight, Car, Calendar, Shield, CheckCircle, ChevronLeft, ChevronRig
 import { useState, useRef, useEffect } from 'react'
 import { Badge } from '../ui/badge'
 
+const quiverOnUrl = process.env.NEXT_PUBLIC_QUIVER_ON_URL ?? process.env.QUIVER_ON_URL ?? '/simulacao'
+
 const carTypes = [
   {
     id: 1,
@@ -152,15 +154,21 @@ function CarCard({ car, isActive }: { car: typeof carTypes[0], isActive: boolean
             </div>
             
             {/* CTA Button */}
-            <motion.button
-              className="group flex w-full items-center justify-center gap-2 rounded-xl bg-neutral-charcoal px-6 py-3 font-semibold text-white transition-all hover:bg-neutral-dark-gray"
+            <motion.div
+              className="w-full"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Sparkles className="h-4 w-4" />
-              Simular agora
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </motion.button>
+              <Button
+                asChild
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-neutral-charcoal px-6 py-3 font-semibold text-white transition-all hover:bg-neutral-dark-gray"
+              >
+                <a href={quiverOnUrl}>
+                  <Sparkles className="h-4 w-4" />
+                  Simular agora
+                </a>
+              </Button>
+            </motion.div>
           </div>
         </div>
       </motion.div>
