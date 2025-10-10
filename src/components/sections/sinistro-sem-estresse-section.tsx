@@ -271,16 +271,16 @@ function PriceCalculator() {
   
   return (
     <motion.div
-      className="rounded-3xl bg-gradient-to-br from-primary to-accent-emerald-green p-8 text-center"
+      className="rounded-3xl bg-primary p-8 text-center"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <p className="mb-2 text-sm font-medium text-neutral-charcoal/80">Seu preço especial</p>
+      <p className="mb-2 text-sm font-medium text-white">Seu preço especial</p>
       <div className="mb-4 flex items-start justify-center">
-        <span className="text-2xl font-bold text-neutral-charcoal">R$</span>
+        <span className="text-2xl font-bold text-white">R$</span>
         <motion.span
-          className="text-6xl font-bold text-neutral-charcoal"
+          className="text-6xl font-bold text-white"
           key={currentPrice}
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -288,9 +288,9 @@ function PriceCalculator() {
         >
           {currentPrice}
         </motion.span>
-        <span className="mt-4 text-lg text-neutral-charcoal">/mês</span>
+        <span className="mt-4 text-lg text-white">/mês</span>
       </div>
-      <Badge variant="secondary" className="bg-white/90 text-neutral-charcoal">
+      <Badge variant="secondary" className="bg-white/90 text-primary">
         <TrendingUp className="mr-1 h-3 w-3" />
         Economia de 40%
       </Badge>

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
 import { 
   FileText, 
   ShieldCheck, 
@@ -12,6 +12,7 @@ import {
   Sparkles
 } from 'lucide-react'
 import { useState, useRef } from 'react'
+import type { PointerEvent as ReactPointerEvent } from 'react'
 import { Badge } from '../ui/badge'
 
 const features = [
@@ -20,7 +21,6 @@ const features = [
     title: 'Sem letras miúdas',
     description: 'Nosso contrato é claro e direto, para que você saiba exatamente o que está contratando.',
     metric: { value: 100, label: 'Transparência' },
-    color: 'from-primary to-yellow-300',
     rotation: -5,
   },
   {
@@ -28,7 +28,6 @@ const features = [
     title: 'Seguro de verdade',
     description: 'Somos regulamentados e fiscalizados pela SUSEP. Sua proteção é garantida por lei.',
     metric: { value: 100, label: 'Regulamentado' },
-    color: 'from-accent-emerald-green to-green-400',
     rotation: 5,
   },
   {
@@ -36,7 +35,6 @@ const features = [
     title: 'Feito por pessoas',
     description: 'Quando precisar, vai falar com gente de verdade, pronta para resolver com empatia.',
     metric: { value: 98, label: 'Satisfação' },
-    color: 'from-primary to-accent-emerald-green',
     rotation: -3,
   },
   {
@@ -44,26 +42,75 @@ const features = [
     title: 'Sua tranquilidade',
     description: 'Nosso objetivo é garantir que você tenha paz de espírito para ir e vir.',
     metric: { value: 24, label: 'Horas por dia' },
-    color: 'from-neutral-charcoal to-neutral-dark-gray',
     rotation: 3,
   },
 ]
+
+const TARGET_CURSOR_SIZE = 160
 
 // Feature card with 3D effect and metrics
 function FeatureCard({ feature, index }: { feature: typeof features[0], index: number }) {
   const [isHovered, setIsHovered] = useState(false)
   const [isFlipped, setIsFlipped] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const cursorX = useMotionValue(0)
+  const cursorY = useMotionValue(0)
+  const cursorOpacity = useMotionValue(0)
+  const cursorSpringConfig = { stiffness: 260, damping: 30, mass: 0.6 }
+  const cursorXSpring = useSpring(cursorX, cursorSpringConfig)
+  const cursorYSpring = useSpring(cursorY, cursorSpringConfig)
+  const cursorOpacitySpring = useSpring(cursorOpacity, { stiffness: 200, damping: 25 })
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return
+    const bounds = cardRef.current?.getBoundingClientRect()
+    if (!bounds) return
+    const offsetX = event.clientX - bounds.left - TARGET_CURSOR_SIZE / 2
+    const offsetY = event.clientY - bounds.top - TARGET_CURSOR_SIZE / 2
+    cursorX.set(offsetX)
+    cursorY.set(offsetY)
+  }
+
+  const handlePointerEnter = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return
+    setIsHovered(true)
+    cursorOpacity.set(1)
+    handlePointerMove(event)
+  }
+
+  const handlePointerLeave = () => {
+    setIsHovered(false)
+    cursorOpacity.set(0)
+  }
   
   return (
     <motion.div
+      ref={cardRef}
       className="relative h-[380px]"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onPointerMove={handlePointerMove}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
     >
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 left-0 z-10"
+        style={{
+          opacity: cursorOpacitySpring,
+          x: cursorXSpring,
+          y: cursorYSpring,
+        }}
+      >
+        <div className="relative h-[160px] w-[160px]">
+          <div className="absolute inset-0 rounded-full bg-primary/10 blur-[28px]" />
+          <div className="absolute inset-0 rounded-full border border-primary/40 backdrop-blur-[2px]" />
+          <div className="absolute inset-[48px] rounded-full border border-primary/30" />
+          <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary" />
+        </div>
+      </motion.div>
       <motion.div
         className="relative h-full w-full"
         animate={{
@@ -88,7 +135,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0], index: n
           >
             {/* Glow effect */}
             <motion.div
-              className={`absolute -inset-1 rounded-3xl bg-gradient-to-br ${feature.color} opacity-0 blur-xl`}
+              className={"absolute -inset-1 rounded-3xl bg-primary opacity-0 blur-xl"}
               animate={{
                 opacity: isHovered ? 0.4 : 0,
               }}
@@ -109,7 +156,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0], index: n
               
               {/* Icon */}
               <motion.div
-                className={`mb-6 inline-flex rounded-2xl bg-gradient-to-br ${feature.color} p-4`}
+                className={"mb-6 inline-flex rounded-2xl bg-dark p-4"}
                 animate={{
                   rotate: isHovered ? feature.rotation : 0,
                   scale: isHovered ? 1.1 : 1,
@@ -160,7 +207,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0], index: n
                 {/* Progress bar */}
                 <div className="mt-3 h-2 w-full rounded-full bg-neutral-light-gray">
                   <motion.div
-                    className={`h-full rounded-full bg-gradient-to-r ${feature.color}`}
+                    className={"h-full rounded-full bg-primary"}
                     initial={{ width: 0 }}
                     whileInView={{ width: `${ feature.metric.value != 24 ? feature.metric.value : 100}%` }}
                     viewport={{ once: true }}
@@ -344,29 +391,6 @@ export function NossoCompromissoSection() {
           </p>
           
           <TrustBadges />
-          
-          {/* SUSEP badge */}
-          <motion.div 
-            className="mt-12 flex justify-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <div className="group relative overflow-hidden rounded-full bg-white px-8 py-4 shadow-lg ring-1 ring-neutral-light-gray/70 transition-all hover:shadow-xl">
-              <div className="flex items-center gap-4">
-                <p className="text-sm font-semibold text-neutral-medium-gray">Regulamentado por:</p>
-                <div className="h-6 w-20 rounded bg-neutral-dark-gray" />
-              </div>
-              
-              {/* Shine effect on hover */}
-              <motion.div
-                className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                whileHover={{ x: '200%' }}
-                transition={{ duration: 0.7 }}
-              />
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Car, ShieldCheck, Headphones, MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
 import { Button } from './ui/button'
@@ -40,52 +41,6 @@ export function Footer() {
       className="relative overflow-hidden border-t border-neutral-light-gray bg-neutral-off-white"
     >
       <div className="app-container space-y-16 py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-3 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-primary">
-              <Car className="h-4 w-4" />
-              Seguro Auto Inteligente
-            </div>
-            <h2 className="text-3xl font-bold text-neutral-charcoal md:text-4xl">
-              Proteção completa para o seu carro com atendimento humano e tecnologia de ponta
-            </h2>
-            <p className="max-w-2xl text-base leading-relaxed text-neutral-medium-gray">
-              A Clica Seguros cuida de toda a jornada do seguro auto: da cotação instantânea ao acompanhamento do sinistro.
-              Conectamos você às melhores seguradoras do país com planos moldados ao seu estilo de direção.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button
-                asChild
-                className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-md shadow-primary/30 transition-transform duration-200 hover:-translate-y-1 hover:bg-primary/90"
-              >
-                <a href={quiverOnUrl}>
-                  Simular agora
-                </a>
-              </Button>
-              <Link
-                href="/contato"
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-light-gray px-6 py-3 text-sm font-semibold text-neutral-charcoal transition-colors duration-200 hover:border-primary hover:text-primary"
-              >
-                Falar com especialista
-                <Headphones className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-
-          <div className="space-y-6 rounded-3xl border border-neutral-light-gray/80 bg-white/90 p-8 shadow-sm backdrop-blur">
-            <h3 className="text-lg font-semibold text-neutral-charcoal">
-              Benefícios exclusivos do seguro auto Clica
-            </h3>
-            <div className="space-y-5">
-              {autoHighlights.map((item) => (
-                <div key={item.title} className="rounded-2xl bg-primary/5 p-4">
-                  <p className="text-sm font-semibold text-primary">{item.title}</p>
-                  <p className="mt-2 text-sm text-neutral-medium-gray">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         <div className="grid gap-10 rounded-3xl border border-neutral-light-gray/80 bg-white/95 p-8 shadow-sm backdrop-blur md:grid-cols-[1fr_0.8fr]">
           <div className="space-y-6">
@@ -148,9 +103,18 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-neutral-light-gray pt-8 text-center text-xs text-neutral-medium-gray md:flex-row md:text-left">
-          <p>
-            &copy; {new Date().getFullYear()} Clica Seguros. Especialistas em seguro auto sob medida.
-          </p>
+          <div className="flex items-center gap-2">
+            <Image
+              src="/logos/Logotipo Clica seguros - Preto.png"
+              alt="Clica Seguros Logo"
+              width={1839}
+              height={591}
+              className="w-28"
+            />
+            <p>
+              &copy; {new Date().getFullYear()} Clica Seguros. <br /> Especialistas em seguro auto sob medida.
+            </p>
+          </div>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href="#privacidade" className="transition-colors hover:text-primary">
               Política de Privacidade

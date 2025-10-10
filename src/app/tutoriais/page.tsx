@@ -195,35 +195,6 @@ export default function TutoriaisPage() {
           </div>
         </div>
       </section>
-
-      <section className="app-container space-y-6 pb-20">
-        <div className="rounded-3xl bg-gradient-to-r from-primary/20 via-primary/10 to-accent-emerald-green/10 p-8 md:p-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-2xl space-y-4">
-              <h2 className="text-2xl font-bold text-neutral-charcoal md:text-3xl">
-                Colocando tudo em prática ficou ainda mais fácil.
-              </h2>
-              <p className="text-sm text-neutral-medium-gray">
-                Combine nossos tutoriais com o simulador para contratar, ajustar ou ampliar sua proteção sem sair de casa.
-              </p>
-            </div>
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <a
-                href={quiverOnUrl}
-                className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition-transform duration-200 hover:-translate-y-0.5 hover:bg-primary/90"
-              >
-                Abrir simulador
-              </a>
-              <Link
-                href="/central-de-ajuda"
-                className="inline-flex items-center justify-center rounded-full border border-neutral-light-gray px-6 py-3 text-sm font-semibold text-neutral-charcoal transition-colors duration-200 hover:border-primary hover:text-primary"
-              >
-                Preciso de ajuda
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   )
 }

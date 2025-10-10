@@ -208,14 +208,14 @@ export default function CentralDeAjudaPage() {
         </div>
       </section>
 
-      <section className="app-container space-y-6 pb-20">
+      <section className="app-container space-y-6 pb-20 mt-20 w-[90rem]">
         <div className="rounded-3xl bg-gradient-to-r from-primary/20 via-primary/10 to-accent-emerald-green/10 p-8 md:p-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl space-y-4">
-              <h2 className="text-2xl font-bold text-neutral-charcoal md:text-3xl">
+              <h2 className="text-2xl font-bold lg:font-extrabold text-neutral-charcoal md:text-3xl">
                 Prefere autonomia? Temos conteúdo guiado e simulador pronto para você.
               </h2>
-              <p className="text-sm text-neutral-medium-gray">
+              <p className="text-sm lg:text-base text-neutral-medium-gray">
                 Compare coberturas, faça cálculos personalizados e finalize tudo online. Nossa equipe entra em cena somente quando você precisar.
               </p>
             </div>

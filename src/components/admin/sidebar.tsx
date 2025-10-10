@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Users, BarChart3, Settings, Home, Menu, X } from 'lucide-react'
@@ -48,10 +49,13 @@ export function AdminSidebar({ isOpen, onToggle }: AdminSidebarProps) {
       <div className="p-6 border-b border-neutral-light-gray/40">
         <div className="flex items-center justify-between">
           <Link href="/admin" className="block group" onClick={() => window.innerWidth < 1024 && onToggle()}>
-            <div>
-              <h1 className="text-lg font-semibold text-neutral-charcoal">Admin</h1>
-              <p className="text-xs text-neutral-medium-gray">Painel de controle</p>
-            </div>
+            <Image
+                src="/logos/Logotipo Clica seguros - Colorido.png"
+                alt="Clica Seguros Logo"
+                width={120}
+                height={40}
+                className="h-auto"
+            />
           </Link>
           <button
             onClick={onToggle}

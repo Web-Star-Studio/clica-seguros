@@ -6,6 +6,7 @@ import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { QueryProvider } from '@/lib/providers/query-provider'
+import { ChatWidget } from '@/components/chat/chat-widget'
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
@@ -50,6 +51,7 @@ export default function RootLayout({
           {shouldShowHeader && <Header />}
           {children}
           {shouldShowFooter && <Footer />}
+          <ChatWidget />
         </QueryProvider>
       </body>
     </html>

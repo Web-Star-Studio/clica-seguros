@@ -2,6 +2,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { FileText, LifeBuoy, ChevronRight, Layers } from 'lucide-react'
@@ -16,9 +17,14 @@ export function Sidebar() {
 
   return (
     <aside className="fixed top-0 left-0 h-full w-64 bg-white border-r border-neutral-light-gray flex flex-col p-4">
-      <Link href="/" className="flex items-center gap-2 p-4 mb-8">
-        <Layers className="h-8 w-8 text-neutral-charcoal" />
-        <span className="text-lg font-bold text-neutral-charcoal">Clica Seguros</span>
+      <Link href="/" className="flex items-center p-4 mb-8">
+        <Image
+            src="/logos/Logotipo Clica seguros - Colorido.png"
+            alt="Clica Seguros Logo"
+            width={120}
+            height={40}
+            className="h-auto"
+        />
       </Link>
 
       <nav className="flex-1 space-y-2">

@@ -70,11 +70,11 @@ export function Header() {
             transition={{ duration: 0.5 }}
           >
             <Image
-              src="/Clica Seguros.png"
+              src="/logos/Logotipo Clica seguros - Azul Intermediário.png"
               alt="Clica Seguros Logo"
-              width={100}
-              height={100}
-              className="h-24 w-24"
+              width={1839}
+              height={591}
+              className="w-28"
             />
           </motion.div>
         </Link>
