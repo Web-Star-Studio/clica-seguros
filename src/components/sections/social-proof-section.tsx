@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import React, { useState } from 'react'
 import { Star, Quote } from 'lucide-react'
+import { Ribbons } from '../effects/ribbons'
 
 const testimonials = [
   {
@@ -152,6 +153,16 @@ export function SocialProofSection() {
       <motion.div 
         className="absolute inset-0 bg-gradient-to-b from-neutral-off-white via-white to-neutral-light-gray/30"
         style={{ y }}
+      />
+      <Ribbons
+        className="pointer-events-none absolute inset-0 z-[1] opacity-55"
+        colors={['#4667ff', '#7f7bf2', '#5fcff2']}
+        baseThickness={24}
+        speedMultiplier={0.53}
+        maxAge={680}
+        enableFade
+        enableShaderEffect
+        effectAmplitude={1.25}
       />
       {/* Floating shapes */}
       <motion.div

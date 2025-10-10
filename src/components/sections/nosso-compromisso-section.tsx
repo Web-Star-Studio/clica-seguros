@@ -14,6 +14,7 @@ import {
 import { useState, useRef } from 'react'
 import type { PointerEvent as ReactPointerEvent } from 'react'
 import { Badge } from '../ui/badge'
+import { Ribbons } from '../effects/ribbons'
 
 const features = [
   {
@@ -294,6 +295,16 @@ export function NossoCompromissoSection() {
         <div className="absolute -left-40 top-40 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute -right-40 bottom-40 h-96 w-96 rounded-full bg-accent-emerald-green/5 blur-3xl" />
       </motion.div>
+      <Ribbons
+        className="pointer-events-none absolute inset-0 z-[1] opacity-50"
+        colors={['#4667ff', '#7f7bf2', '#5fcff2']}
+        baseThickness={24}
+        speedMultiplier={0.54}
+        maxAge={680}
+        enableFade
+        enableShaderEffect
+        effectAmplitude={1.3}
+      />
       
       {/* Floating particles */}
       {[...Array(8)].map((_, i) => (

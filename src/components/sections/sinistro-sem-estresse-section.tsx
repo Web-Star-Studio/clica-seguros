@@ -19,6 +19,7 @@ import {
 import { useState, useRef, useEffect } from 'react'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
+import { Ribbons } from '../effects/ribbons'
 
 const steps = [
   {
@@ -356,6 +357,16 @@ export function SinistroSemEstresseSection() {
         <div className="absolute left-20 top-20 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute bottom-20 right-20 h-96 w-96 rounded-full bg-accent-emerald-green/10 blur-3xl" />
       </motion.div>
+      <Ribbons
+        className="pointer-events-none absolute inset-0 z-[1] opacity-60"
+        colors={['#4667ff', '#7f7bf2', '#5fcff2', '#8fffe9']}
+        baseThickness={36}
+        speedMultiplier={0.55}
+        maxAge={740}
+        enableFade
+        enableShaderEffect
+        effectAmplitude={1.4}
+      />
       
       {/* Floating elements */}
       {[...Array(6)].map((_, i) => (

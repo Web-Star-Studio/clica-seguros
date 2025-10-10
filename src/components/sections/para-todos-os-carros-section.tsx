@@ -5,6 +5,7 @@ import { Button } from '../ui/button'
 import { ArrowRight, Car, Calendar, Shield, CheckCircle, ChevronLeft, ChevronRight, Sparkles, Zap, TrendingUp, MessageCircle } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 import { Badge } from '../ui/badge'
+import { Ribbons } from '../effects/ribbons'
 
 const quiverOnUrl = process.env.NEXT_PUBLIC_QUIVER_ON_URL ?? process.env.QUIVER_ON_URL ?? '/simulacao'
 
@@ -295,6 +296,16 @@ export function ParaTodosOsCarrosSection() {
         <div className="absolute -right-40 top-20 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute -left-40 bottom-20 h-80 w-80 rounded-full bg-accent-emerald-green/5 blur-3xl" />
       </motion.div>
+      <Ribbons
+        className="pointer-events-none absolute inset-0 z-[1] opacity-55"
+        colors={['#4667ff', '#7f7bf2', '#5fcff2', '#8fffe9']}
+        baseThickness={26}
+        speedMultiplier={0.5}
+        maxAge={700}
+        enableFade
+        enableShaderEffect
+        effectAmplitude={1.2}
+      />
       
       {/* Road animation */}
       <div className="absolute bottom-0 left-0 right-0 h-2 bg-neutral-dark-gray">

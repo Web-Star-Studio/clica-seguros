@@ -4,8 +4,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Car, ShieldCheck, Headphones, MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
-import { Button } from './ui/button'
+import { ShieldCheck, MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
+import { Ribbons } from '@/components/effects/ribbons'
 
 const quiverOnUrl = process.env.NEXT_PUBLIC_QUIVER_ON_URL ?? process.env.QUIVER_ON_URL ?? '/simulacao'
 
@@ -40,7 +40,19 @@ export function Footer() {
       transition={{ duration: 0.5 }}
       className="relative overflow-hidden border-t border-neutral-light-gray bg-neutral-off-white"
     >
-      <div className="app-container space-y-16 py-16">
+      <div className="pointer-events-none absolute inset-0">
+        <Ribbons
+          className="opacity-50"
+          colors={['#4667ff', '#7f7bf2', '#5fcff2', '#8fffe9']}
+          baseThickness={20}
+          speedMultiplier={0.58}
+          maxAge={600}
+          enableFade
+          enableShaderEffect
+          effectAmplitude={1.1}
+        />
+      </div>
+      <div className="app-container relative z-10 space-y-16 py-16">
 
         <div className="grid gap-10 rounded-3xl border border-neutral-light-gray/80 bg-white/95 p-8 shadow-sm backdrop-blur md:grid-cols-[1fr_0.8fr]">
           <div className="space-y-6">

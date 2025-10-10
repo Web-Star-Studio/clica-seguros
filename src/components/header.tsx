@@ -3,15 +3,16 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
-import { 
-  Menu, 
-  X, 
+import {
+  Menu,
+  X,
   FileText,
   Youtube,
   MessageCircle,
 } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { Ribbons } from '@/components/effects/ribbons'
 
 const navLinks = [
   {
@@ -38,7 +39,6 @@ export function Header() {
   
   const { scrollY } = useScroll()
   const headerHeight = useTransform(scrollY, [0, 100], [80, 64])
-  const headerOpacity = useTransform(scrollY, [0, 100], [0.95, 1])
   const quiverOnUrl = process.env.NEXT_PUBLIC_QUIVER_ON_URL ?? process.env.QUIVER_ON_URL ?? '/simulacao'
   
   useEffect(() => {
@@ -51,7 +51,7 @@ export function Header() {
   }, [])
 
   return (
-    <motion.header 
+    <motion.header
       className={`sticky top-0 z-50 w-full overflow-visible transition-all ${
         isScrolled 
           ? 'border-b border-neutral-light-gray/50 shadow-lg' 
@@ -59,11 +59,23 @@ export function Header() {
       }`}
       style={{
         height: headerHeight,
-        backgroundColor: `rgba(248, 248, 246, ${headerOpacity})`,
+        backgroundColor: 'rgba(248, 248, 246, 0.98)',
         backdropFilter: 'blur(12px)',
       }}
     >
-      <div className="app-container flex h-full items-center justify-between gap-8 overflow-visible">
+      <div className="pointer-events-none absolute inset-0">
+        <Ribbons
+          className="opacity-60"
+          colors={['#4667ff', '#7f7bf2', '#5fcff2']}
+          baseThickness={18}
+          speedMultiplier={0.3}
+          maxAge={540}
+          enableFade
+          enableShaderEffect
+          effectAmplitude={1.2}
+        />
+      </div>
+      <div className="app-container relative z-10 flex h-full items-center justify-between gap-8 overflow-visible">
         {/* Logo with animation */}
         <Link href="/" className="group flex items-center space-x-2">
           <motion.div

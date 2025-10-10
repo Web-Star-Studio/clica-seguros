@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="relative overflow-hidden bg-neutral-off-white">
       <Ribbons
-        className="opacity-70"
+        className="z-[2] opacity-70"
         colors={['#4667ff', '#7f7bf2', '#5fcff2', '#8fffe9']}
         baseThickness={24}
         speedMultiplier={0.52}
