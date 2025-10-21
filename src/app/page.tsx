@@ -1,5 +1,6 @@
-import { Ribbons } from '@/components/effects/ribbons'
+import { Header } from '@/components/header'
 import { HeroSection } from '@/components/sections/hero-section'
+import { Ribbons } from '@/components/effects/ribbons'
 import { SinistroSemEstresseSection } from '@/components/sections/sinistro-sem-estresse-section'
 import { ComoFuncionaSection } from '@/components/sections/como-funciona-section'
 import { NossoCompromissoSection } from '@/components/sections/nosso-compromisso-section'
@@ -10,6 +11,8 @@ import { CtaSection } from '@/components/sections/cta-section'
 export default function Home() {
   return (
     <main className="relative overflow-hidden bg-neutral-off-white">
+      <Header />
+      <HeroSection />
       <Ribbons
         className="z-[2] opacity-70"
         colors={['#4667ff', '#7f7bf2', '#5fcff2', '#8fffe9']}
@@ -21,7 +24,6 @@ export default function Home() {
         effectAmplitude={1.4}
       />
       <div className="relative z-10 flex flex-col">
-        <HeroSection />
         <SinistroSemEstresseSection />
         <NossoCompromissoSection />
         <ParaTodosOsCarrosSection />
